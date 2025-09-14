@@ -97,3 +97,57 @@ Apakah ada feedback untuk asisten dosen tutorial 1 yang telah kamu kerjakan sebe
 Sumber:
 https://www.geeksforgeeks.org/python/django-settings-file-step-by-step-explanation/
 https://www.revou.co/kosakata/django
+
+
+
+# Tugas 3
+
+## ** Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform? **
+ 
+## Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
+ 
+## Jelaskan fungsi dari method is_valid() pada form Django dan mengapa kita membutuhkan method tersebut?
+
+## Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
+
+## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+- Tambahkan 4 fungsi views baru untuk melihat objek yang sudah ditambahkan dalam format XML, JSON, XML by ID, dan JSON by ID.
+Pada file views.py:
+from django.http import HttpResponse
+from django.core import serializers
+import models Porduct yang digunakan pada fungsi untuk melihat objek
+buat 4 fungsi views dengan try except untuk mengantisipasi id tidak ditemukan
+
+
+- Membuat routing URL untuk masing-masing views yang telah ditambahkan pada poin 1.
+Pada file urls.py pada direktori main:
+import 4 fungsi yang sudah dibuat
+tambahkan path url ke dalam url patterns untuk akses fungsi yang sudah diimpor
+
+
+- Membuat halaman yang menampilkan data objek model yang memiliki tombol "Add" yang akan redirect ke halaman form, serta tombol "Detail" pada setiap data objek model yang akan menampilkan halaman detail objek.
+- Membuat halaman form untuk menambahkan objek model pada app sebelumnya.
+- Membuat halaman yang menampilkan detail dari setiap data objek model.
+
+
+ --Implementasi skeleton sebagai kerangka views (membuat base.html)
+ - Buat direktori "templates" di root folde dan berkas "base.html" untuk kerangka umum.
+ - Di settings.py pada variable TEMPLATES, ditambahkan potongan code DIRS untuk mendeteksi berkas "template"
+ - Menambah block content dan extend base.html di file main.html untuk dijadikan template utama
+
+ --Buat formnya dulu untuk add product
+ - Buat file "forms.py" di direktori "main"
+ - Isi dengan kode untuk menunjukkan model yang akan digunakan untuk form dan fieldnya
+
+
+- Membuat halaman form untuk menambahkan objek model pada app sebelumnya.
+
+
+
+- Membuat halaman yang menampilkan detail dari setiap data objek model.
+ - Membuat product_detail.html untuk halaman form detail product
+ - Isi sesuai dengan yang diinginkan
+
+
+## Apakah ada feedback untuk asdos di tutorial 2 yang sudah kalian kerjakan?
+Tidak ada
