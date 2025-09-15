@@ -112,6 +112,11 @@ https://www.revou.co/kosakata/django
 
 ## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 - Tambahkan 4 fungsi views baru untuk melihat objek yang sudah ditambahkan dalam format XML, JSON, XML by ID, dan JSON by ID.
+
+Pada models.py:
+Tambahkan field id
+Lakukan migration untuk mengupdate models
+
 Pada file views.py:
 from django.http import HttpResponse
 from django.core import serializers
@@ -125,28 +130,31 @@ import 4 fungsi yang sudah dibuat
 tambahkan path url ke dalam url patterns untuk akses fungsi yang sudah diimpor
 
 
-- Membuat halaman yang menampilkan data objek model yang memiliki tombol "Add" yang akan redirect ke halaman form, serta tombol "Detail" pada setiap data objek model yang akan menampilkan halaman detail objek.
-- Membuat halaman form untuk menambahkan objek model pada app sebelumnya.
-- Membuat halaman yang menampilkan detail dari setiap data objek model.
-
-
  --Implementasi skeleton sebagai kerangka views (membuat base.html)
  - Buat direktori "templates" di root folde dan berkas "base.html" untuk kerangka umum.
  - Di settings.py pada variable TEMPLATES, ditambahkan potongan code DIRS untuk mendeteksi berkas "template"
  - Menambah block content dan extend base.html di file main.html untuk dijadikan template utama
 
- --Buat formnya dulu untuk add product
- - Buat file "forms.py" di direktori "main"
- - Isi dengan kode untuk menunjukkan model yang akan digunakan untuk form dan fieldnya
+ -- Menambahkan tombol "Add" direct ke form add product dan tombol "Detail" direct ke form detail product
+ - Menambahkan context untuk product list di fungsi show_main di views.py untuk main.html dapat menunjukkan list product
+ - Mengubah berkas main.html menambahkan button dan url nya menuju function di views.py
+
+ - Buat file "forms.py" di direktori "main". Import ModelForm, class bawaan yang memudahkan buat form dari model. Form akan berdasarkan struktur model ini, otomatis buat field input dan validasi otomatis sesuai tipe data di model. ProductForm sebagai jembatan otomatis antara form HTML dan model database Product
+
+ - Tambah fungsi di views.py untuk add product dan show detail, dan ngedirect ke file html yang sesuai.
+  - Fungsi add_product menggunakan form yang udah dibuat sebelumnya, dan bisa langsung di save, dengan form.save() akan langsung tersimpan ke database
+  - Fungsi show_detail akan mencoba mencari object yang sesuai dengan id pada data produk, jika tidak ditemukan akan memberikan error 404 Not Found. Jika ditemukan, maka objek produk dikembalikan. Lalu membuat context yang isinya berupa objek produk yang diambil dari database, yang dimana nantinya pada product_detail.html bisa diakses data productnya.
 
 
 - Membuat halaman form untuk menambahkan objek model pada app sebelumnya.
-
-
+ - Buat file add_product.html untuk halaman form add product
+ - Isi sesuai dengan yang diinginkan
 
 - Membuat halaman yang menampilkan detail dari setiap data objek model.
  - Membuat product_detail.html untuk halaman form detail product
  - Isi sesuai dengan yang diinginkan
+
+Buat forms.py
 
 
 ## Apakah ada feedback untuk asdos di tutorial 2 yang sudah kalian kerjakan?
