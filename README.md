@@ -109,18 +109,22 @@ https://www.revou.co/kosakata/django
 
  - Contoh: client ingin menampilkan daftar produk, browser mengirimkan request ke server, server mengirimkan data produk dalam format tertentu
 
+ - Tanpa data delivery, platform tidak dapat mengelola data-data dengan baik oleh berbagai komponen.
+
 ## Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
 - JSON memiliki format data yang ringan dan lebih mudah dibaca, lebih cepat pengolahan dan memori sedikit. Namun kurang fleksibel dalam penggunaan bahasa dan platform, karena mewajibkan data dalam bentuk objek.
 - XML memiliki tag yang membungkus setiap elemen datanya.
-- JSON memiliki format data ringkas dan ringan, selain itu JSON juga memiliki keamanan data yang lebih baik dibandingkan XML. JSON populer dikarenakan optimasi oleh browser agar bisa diproses dengan lebih cepat
+- JSON memiliki format data ringkas dan ringan, mirip dengan struktur dictionary python yang berbentuk key:value pair sehingga JSON lebih umum dan mudah dipahami oleh pengembang. Selain itu JSON juga memiliki keamanan data yang lebih baik dibandingkan XML. JSON populer dikarenakan optimasi oleh browser agar bisa diproses dengan lebih cepat.
+- JSON cocok digunakan untuk web/app, namun jika proyek dalam skala besar yang kompleks lebih unggul XML.
  
 ## Jelaskan fungsi dari method is_valid() pada form Django dan mengapa kita membutuhkan method tersebut?
  - Method is_valid() pada form akan memeriksa validasi untuk semua fieldsnya apakah data yang dimasukkan valid. Jika data tidak valid, akan tetap pada template form dan dapat mengubah data yang sebelumnya telah diisi agar diisi dengna data yang valid agar bisa disubmit untuk diproses.
- - Memeriksa data form untuk memenuhi semua validasi dari Django, memeriksa jika data yang dimasukkan valid sesuai dengan fieldnya. Ini digunakan untuk mencegah data yang dimasukkan salah dan menghindari error, selain itu juga secara langsung dapat memberikan pesan salah tersebut kepada pengguna.
+ - Memeriksa data form untuk memenuhi semua validasi dari Django, memeriksa jika data yang dimasukkan valid sesuai dengan fieldnya. Ini digunakan untuk mencegah data yang dimasukkan salah dan menghindari error, selain itu juga secara langsung dapat memberikan pesan salah tersebut kepada pengguna. Ini juga menjaga keamanan dan kebersihan database.
+ - Jika input yang dimasukkan user sudah valid, method akan mengembalikan True dan data pada form akan diproses dan disimpan dalam database.
 
 ## Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
- - Untuk keamanan, mencegah CSRF Attack()
- - Ini membuat setiap form HTML memiliki token unik. Saat form dikirim, Django akan memeriksa token, memverifikasi request.
+ - Untuk keamanan, mencegah CSRF Attack(Cross-Site Request Forgery). CSRF adalah serangan yang meminta user yang sudah terautentikasi untuk menjalankan permintaan berbahaya.
+ - Dengan csrf_token, membuat setiap form HTML memiliki token unik. Saat form dikirim, Django akan memeriksa token, memverifikasi cek kevalidan request.
 
 ## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 - Tambahkan 4 fungsi views baru untuk melihat objek yang sudah ditambahkan dalam format XML, JSON, XML by ID, dan JSON by ID.
@@ -171,6 +175,9 @@ tambahkan path url ke dalam url patterns untuk akses fungsi yang sudah diimpor
 
 - Tambahkan entri url pws pada CSRF_TRUSTED_ORIGINS di settings.py. CSRF_TRUSTED_ORIGINS berisi daftar URL yang dianggap aman untuk menerima request seperti POST (mengizinkan domain luar untuk mengirimkan form). Digunakan jika proyek diakses dari domain eksternal atau server deployment, tidak pada local host.
 
+## Mengakses keempat URL di poin 2 menggunakan Postman, membuat screenshot dari hasil akses URL pada Postman, dan menambahkannya ke dalam README.md.
+https://docs.google.com/document/d/1NJP6V4iPBpmWb_cuJqhu4gwz8LW48pW49eaBW3HsTcw/edit?usp=sharing
+
 
 ## Apakah ada feedback untuk asdos di tutorial 2 yang sudah kalian kerjakan?
 Tidak ada
@@ -178,3 +185,4 @@ Tidak ada
 References:
 https://localstartupfest.lokercepat.id/faq/perbedaan-xml-dan-json/
 https://docs.djangoproject.com/en/5.2/topics/forms/
+https://owasp.org/www-community/attacks/csrf
