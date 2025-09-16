@@ -100,9 +100,9 @@ https://www.revou.co/kosakata/django
 
 
 
-# Tugas 3
+# **Tugas 3**
 
-## ** Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform? **
+## Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
  - Data delivery diperlukan untuk data bisa dikirimkan dari satu bagian sistem ke bagian lain, bisa dari server ke client maupun client ke server, agar data bisa diproses atau ditampilkan. Contoh, add merupakan deliver data dari client ke server untuk disimpan dalam data base. detail merupakan deliver data dari server ke client, data diambil melalui database yang kemudian diproses untuk ditampilkan (bisa melalui format html, xml, json).
 
  - Client bertugas untuk menampilkan data, server untuk mengelola data, dan database untuk menyimpan data. Ketiga ini membutuhkan data delivery untuk mengirim dan menerima data dengan format.
@@ -112,9 +112,10 @@ https://www.revou.co/kosakata/django
 ## Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
 - JSON memiliki format data yang ringan dan lebih mudah dibaca, lebih cepat pengolahan dan memori sedikit. Namun kurang fleksibel dalam penggunaan bahasa dan platform, karena mewajibkan data dalam bentuk objek.
 - XML memiliki tag yang membungkus setiap elemen datanya.
-- JSON memiliki format data ringkas dan ringan, selain itu JSON juga memiliki keamanan data yang lebih baik dibandingkan XML. JSON populer dikarenakan optimasi oleh browser agar bisa diproses dengan lebih cepat.
+- JSON memiliki format data ringkas dan ringan, selain itu JSON juga memiliki keamanan data yang lebih baik dibandingkan XML. JSON populer dikarenakan optimasi oleh browser agar bisa diproses dengan lebih cepat
  
 ## Jelaskan fungsi dari method is_valid() pada form Django dan mengapa kita membutuhkan method tersebut?
+ - Method is_valid() pada form akan memeriksa validasi untuk semua fieldsnya apakah data yang dimasukkan valid. Jika data tidak valid, akan tetap pada template form dan dapat mengubah data yang sebelumnya telah diisi agar diisi dengna data yang valid agar bisa disubmit untuk diproses.
  - Memeriksa data form untuk memenuhi semua validasi dari Django, memeriksa jika data yang dimasukkan valid sesuai dengan fieldnya. Ini digunakan untuk mencegah data yang dimasukkan salah dan menghindari error, selain itu juga secara langsung dapat memberikan pesan salah tersebut kepada pengguna.
 
 ## Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
@@ -143,7 +144,7 @@ tambahkan path url ke dalam url patterns untuk akses fungsi yang sudah diimpor
 
  --Implementasi skeleton sebagai kerangka views (membuat base.html)
  - Buat direktori "templates" di root folde dan berkas "base.html" untuk kerangka umum.
- - Di settings.py pada variable TEMPLATES, ditambahkan potongan code DIRS untuk mendeteksi berkas "template"
+ - Di settings.py pada variable TEMPLATES, ditambahkan potongan code DIRS untuk mendeteksi base.html di berkas "template" di root directory. DIRS berisi seluruh list direktori, folder mana saja untuk dicari file template dengnan urutan folder dalma list menentukan prioritas pencarian template. (Tugas sebelumnya tidak membutuhkan DIRS karena template berada dalam app/main, Django secara default mencari hanya di dalam app. Sehingga pada tugas 3 ini, ketika ditambahkan base.html di templates pada root project(di luar app), kita perlu menambahkan DIRS agar Django dapat mendeteksi folder global untuk template).
  - Menambah block content dan extend base.html di file main.html untuk dijadikan template utama
 
  -- Menambahkan tombol "Add" direct ke form add product dan tombol "Detail" direct ke form detail product
@@ -175,4 +176,5 @@ tambahkan path url ke dalam url patterns untuk akses fungsi yang sudah diimpor
 Tidak ada
 
 References:
-- https://localstartupfest.lokercepat.id/faq/perbedaan-xml-dan-json/
+https://localstartupfest.lokercepat.id/faq/perbedaan-xml-dan-json/
+https://docs.djangoproject.com/en/5.2/topics/forms/
