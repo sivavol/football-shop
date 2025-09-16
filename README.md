@@ -103,75 +103,81 @@ https://www.revou.co/kosakata/django
 # **Tugas 3**
 
 ## Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
- - Data delivery diperlukan untuk data bisa dikirimkan dari satu bagian sistem ke bagian lain, bisa dari server ke client maupun client ke server, agar data bisa diproses atau ditampilkan. Contoh, add merupakan deliver data dari client ke server untuk disimpan dalam data base. detail merupakan deliver data dari server ke client, data diambil melalui database yang kemudian diproses untuk ditampilkan (bisa melalui format html, xml, json).
+ - Data delivery merupakan proses pengiriman data dari satu bagian sistem ke bagian lainnya, bisa dari server ke client maupun client ke server, agar data dapat diproses atau ditampilkan. Contoh, add product merupakan deliver data dari client ke server untuk disimpan dalam database. detail product merupakan deliver data dari server ke client, untuk ditampilkan.
 
- - Client bertugas untuk menampilkan data, server untuk mengelola data, dan database untuk menyimpan data. Ketiga ini membutuhkan data delivery untuk mengirim dan menerima data dengan format.
+ - Client bertugas untuk menampilkan data ke pengguna, server untuk mengelola data dan menangani request dari client, dan database untuk menyimpan data. Ketiga ini membutuhkan data delivery agar komunikasi antar bagian dapat berjalan (untuk mengirim dan menerima data) dengan format yang terstruktur seperti HTML, XML, atau JSON.
 
- - Contoh: client ingin menampilkan daftar produk, browser mengirimkan request ke server, server mengirimkan data produk dalam format tertentu
-
- - Tanpa data delivery, platform tidak dapat mengelola data-data dengan baik oleh berbagai komponen.
+ - Tanpa data delivery, setiap komponen ini tidak dapat saling terhubung, platform tidak dapat mengelola data-data antar komponen dengan baik. Data delivery penting sebagai jembatan yang memungkinkan komunikasi lancar antara berbagai bagian dari sistem, seperti client, server, dan database.
 
 ## Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
-- JSON memiliki format data yang ringan dan lebih mudah dibaca, lebih cepat pengolahan dan memori sedikit. Namun kurang fleksibel dalam penggunaan bahasa dan platform, karena mewajibkan data dalam bentuk objek.
-- XML memiliki tag yang membungkus setiap elemen datanya.
-- JSON memiliki format data ringkas dan ringan, mirip dengan struktur dictionary python yang berbentuk key:value pair sehingga JSON lebih umum dan mudah dipahami oleh pengembang. Selain itu JSON juga memiliki keamanan data yang lebih baik dibandingkan XML. JSON populer dikarenakan optimasi oleh browser agar bisa diproses dengan lebih cepat.
-- JSON cocok digunakan untuk web/app, namun jika proyek dalam skala besar yang kompleks lebih unggul XML.
+- JSON memiliki format yang ringkas dan sederhana. Data ditulis dalam bentuk pasangan key-value yang mirip dengan struktur dictionary di Python. Struktur ini membuat JSON lebih mudah dipahami oleh pengembang, ringan, dan lebih cepat untuk diproses oleh mesin. JSON juga membutuhkan lebih sedikit ruang penyimpanan dibandingkan XML, yang membuat proses transfer data menjadi lebih cepat dan efisien.
+
+- Di sisi lain, XML menggunakan tag untuk membungkus setiap elemen datanya. Struktur XML lebih fleksibel dibandingkan JSON karena dapat menyimpan data yang lebih kompleks sehingga sering digunakan pada proyek besar. Namun, fleksibilitas ini menyebabkan ukuran file XML cenderung lebih besar karena penggunaan tag yang banyak, dan proses XML juga lebih lambar dibandingkan JSON.
+
+- JSON lebih populer karena kesederhanaannya, kemudian pembacaan, ukuran yang lebih kecil, serta performa lebih cepat. Ini membuat JSON menjadi pilihan untuk aplikasi berbasis web maupun mobile. Meskipun demikian, XML tetap memiliki tempatnya, terutama pada sistem besar yang memiliki struktur data yang kompleks dan fleksibel.
  
 ## Jelaskan fungsi dari method is_valid() pada form Django dan mengapa kita membutuhkan method tersebut?
- - Method is_valid() pada form akan memeriksa validasi untuk semua fieldsnya apakah data yang dimasukkan valid. Jika data tidak valid, akan tetap pada template form dan dapat mengubah data yang sebelumnya telah diisi agar diisi dengna data yang valid agar bisa disubmit untuk diproses.
- - Memeriksa data form untuk memenuhi semua validasi dari Django, memeriksa jika data yang dimasukkan valid sesuai dengan fieldnya. Ini digunakan untuk mencegah data yang dimasukkan salah dan menghindari error, selain itu juga secara langsung dapat memberikan pesan salah tersebut kepada pengguna. Ini juga menjaga keamanan dan kebersihan database.
- - Jika input yang dimasukkan user sudah valid, method akan mengembalikan True dan data pada form akan diproses dan disimpan dalam database.
+ - Method is_valid() pada form berfungsi untuk memvalidasi data yang dimasukkan pengguna sebelum akhirnya data diproses atau disimpan dalam database.
+
+ - Ketika sebuah form dikirimkan, data yang dimasukkan akan diperiksa oleh is_valid(). Proses ini memerikda setiap field dalam data form, memastikan bahwa data yang dimasukkan sesuai dengan tipe data yang diharapkan dan memenuhi semua aturan validasi yang telah ditentukan di model atau form itu sendiri.
+
+ - Jika data valid, method akan mengembalikan nilai True, data pada form akan diproses dan disimpan dalam database. Namun jika data tidak valid, form akan ditampilkan kembali kepada pengguna bersama dengan pesan error yang jelas, sehingga pengguna dapat memperbaiki input mereka.
+ 
+ - Dengan adanya mekanisme ini, Django membantu untuk mencegah data yang dimasukkan salah masuk ke dalam database dan menghindari error, menjaga integritas sistem, juga meningkatkan keamanan dan kebersihan database.
 
 ## Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
- - Untuk keamanan, mencegah CSRF Attack(Cross-Site Request Forgery). CSRF adalah serangan yang meminta user yang sudah terautentikasi untuk menjalankan permintaan berbahaya.
- - Dengan csrf_token, membuat setiap form HTML memiliki token unik. Saat form dikirim, Django akan memeriksa token, memverifikasi cek kevalidan request.
+ - Django menyediakan csrf_token sebagai keamanan untuk mencegah mencegah CSRF Attack(Cross-Site Request Forgery). CSRF adalah serangan di mana penyerang mencoba memanfaatkan pengguna yang sudah terautentikasi atau login untuk mengirimkan request berbahaya ke server tanpa sepengetahuan mereka.
+
+ - Ketika server meminta form tersebut, Django akan memverifikasi token, mengecek kevalidan request untuk memastikan bahwa request tersebut benar-benar berasal dari sumber yang sah dan bukan dari pihak luar yang berusaha menyerang. Request akan ditolak jika token tidak valid.
+
+ - Dengan tidak adanya scrf_token, aplikasi menjadi tidak aman dan rentan terhadap serangan CSRF. Penyerang dapat membuat halaman palsu yang terlihat seperti halaman resmi, yang kemudian memanfaatkan akun pengguna yang sedang login untuk melakukan tindakan berbahaya seperti mengubah data, menghapus data, ataupun melakukan transaksi.
 
 ## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 - Tambahkan 4 fungsi views baru untuk melihat objek yang sudah ditambahkan dalam format XML, JSON, XML by ID, dan JSON by ID.
 
-Pada models.py:
-Tambahkan field id
-Lakukan migration untuk mengupdate models
+  - Pada models.py:
+    - Tambahkan field id
+    - Lakukan migration untuk mengupdate models
 
-Pada file views.py:
-from django.http import HttpResponse
-from django.core import serializers
-import models Porduct yang digunakan pada fungsi untuk melihat objek
-buat 4 fungsi views dengan try except untuk mengantisipasi id tidak ditemukan
+  - Pada file views.py:
+    - from django.http import HttpResponse
+    - from django.core import serializers
+    - import models Porduct yang digunakan pada fungsi untuk melihat objek
+    - buat 4 fungsi views dengan try except untuk mengantisipasi id tidak ditemukan
 
 
 - Membuat routing URL untuk masing-masing views yang telah ditambahkan pada poin 1.
-Pada file urls.py pada direktori main:
-import 4 fungsi yang sudah dibuat
-tambahkan path url ke dalam url patterns untuk akses fungsi yang sudah diimpor
+    - Pada file urls.py pada direktori main:
+        - import 4 fungsi yang sudah dibuat
+        - tambahkan path url ke dalam url patterns untuk akses fungsi yang sudah diimpor
 
 
- --Implementasi skeleton sebagai kerangka views (membuat base.html)
- - Buat direktori "templates" di root folde dan berkas "base.html" untuk kerangka umum.
- - Di settings.py pada variable TEMPLATES, ditambahkan potongan code DIRS untuk mendeteksi base.html di berkas "template" di root directory. DIRS berisi seluruh list direktori, folder mana saja untuk dicari file template dengnan urutan folder dalma list menentukan prioritas pencarian template. (Tugas sebelumnya tidak membutuhkan DIRS karena template berada dalam app/main, Django secara default mencari hanya di dalam app. Sehingga pada tugas 3 ini, ketika ditambahkan base.html di templates pada root project(di luar app), kita perlu menambahkan DIRS agar Django dapat mendeteksi folder global untuk template).
- - Menambah block content dan extend base.html di file main.html untuk dijadikan template utama
+- Implementasi skeleton sebagai kerangka views (membuat base.html)
+    - Buat direktori "templates" di root folde dan berkas "base.html" untuk kerangka umum.
+    - Di settings.py pada variable TEMPLATES, ditambahkan potongan code DIRS untuk mendeteksi base.html di berkas "template" di root directory. DIRS berisi seluruh list direktori, folder mana saja untuk dicari file template dengnan urutan folder dalma list menentukan prioritas pencarian template. (Tugas sebelumnya tidak membutuhkan DIRS karena template berada dalam app/main, Django secara default mencari hanya di dalam app. Sehingga pada tugas 3 ini, ketika ditambahkan base.html di templates pada root project(di luar app), kita perlu menambahkan DIRS agar Django dapat mendeteksi folder global untuk template).
+    - Menambah block content dan extend base.html di file main.html untuk dijadikan template utama
 
- -- Menambahkan tombol "Add" direct ke form add product dan tombol "Detail" direct ke form detail product
- - Menambahkan context untuk product list di fungsi show_main di views.py untuk main.html dapat menunjukkan list product
- - Mengubah berkas main.html menambahkan button dan url nya menuju function di views.py
+- Menambahkan tombol "Add" direct ke form add product dan tombol "Detail" direct ke form detail product
+    - Menambahkan context untuk product list di fungsi show_main di views.py untuk main.html dapat menunjukkan list product
+    - Mengubah berkas main.html menambahkan button dan url nya menuju function di views.py
 
- - Buat file "forms.py" di direktori "main". Import ModelForm, class bawaan yang memudahkan buat form dari model. Form akan berdasarkan struktur model ini, otomatis buat field input dan validasi otomatis sesuai tipe data di model. ProductForm sebagai jembatan otomatis antara form HTML dan model database Product
+- Buat file "forms.py" di direktori "main". Import ModelForm, class bawaan yang memudahkan buat form dari model. Form akan berdasarkan struktur model ini, otomatis buat field input dan validasi otomatis sesuai tipe data di model. ProductForm sebagai jembatan otomatis antara form HTML dan model database Product
 
- - Tambah fungsi di views.py untuk add product dan show detail, dan ngedirect ke file html yang sesuai.
-  - Fungsi add_product menggunakan form yang udah dibuat sebelumnya, dan bisa langsung di save, dengan form.save() akan langsung tersimpan ke database
-  - Fungsi show_detail akan mencoba mencari object yang sesuai dengan id pada data produk, jika tidak ditemukan akan memberikan error 404 Not Found. Jika ditemukan, maka objek produk dikembalikan. Lalu membuat context yang isinya berupa objek produk yang diambil dari database, yang dimana nantinya pada product_detail.html bisa diakses data productnya.
+    - Tambah fungsi di views.py untuk add product dan show detail, dan ngedirect ke file html yang sesuai.
+        - Fungsi add_product menggunakan form yang udah dibuat sebelumnya, dan bisa langsung di save, dengan form.save() akan langsung tersimpan ke database
+        - Fungsi show_detail akan mencoba mencari object yang sesuai dengan id pada data produk, jika tidak ditemukan akan memberikan error 404 Not Found. Jika ditemukan, maka objek produk dikembalikan. Lalu membuat context yang isinya berupa objek produk yang diambil dari database, yang dimana nantinya pada product_detail.html bisa diakses data productnya.
 
 
 - Membuat halaman form untuk menambahkan objek model pada app sebelumnya.
- - Buat file add_product.html untuk halaman form add product
- - Isi sesuai dengan yang diinginkan
-    - Form mengirimkan data ke server menggunakan metode POST karena mengubah data
-    - Menambahkan token keamanan, diperlukan ketika membuat form POST
-    - form.as_table, Django otomatis merender seluruh field form (PorductForm) dalam bentuk table rows dan setiap field akan punya label dan input.
+    - Buat file add_product.html untuk halaman form add product
+    - Isi sesuai dengan yang diinginkan
+        - Form mengirimkan data ke server menggunakan metode POST karena mengubah data
+        - Menambahkan token keamanan, diperlukan ketika membuat form POST
+        - form.as_table, Django otomatis merender seluruh field form (PorductForm) dalam bentuk table rows dan setiap field akan punya label dan input.
 
 - Membuat halaman yang menampilkan detail dari setiap data objek model.
- - Membuat product_detail.html untuk halaman form detail product
- - Isi sesuai dengan yang diinginkan
+    - Membuat product_detail.html untuk halaman form detail product
+    - Isi sesuai dengan yang diinginkan
 
 - Tambahkan entri url pws pada CSRF_TRUSTED_ORIGINS di settings.py. CSRF_TRUSTED_ORIGINS berisi daftar URL yang dianggap aman untuk menerima request seperti POST (mengizinkan domain luar untuk mengirimkan form). Digunakan jika proyek diakses dari domain eksternal atau server deployment, tidak pada local host.
 
