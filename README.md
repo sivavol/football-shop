@@ -192,3 +192,33 @@ References:
 https://localstartupfest.lokercepat.id/faq/perbedaan-xml-dan-json/
 https://docs.djangoproject.com/en/5.2/topics/forms/
 https://owasp.org/www-community/attacks/csrf
+
+# **Tugas 4**
+## Apa itu Django AuthenticationForm? Jelaskan juga kelebihan dan kekurangannya.
+
+## Apa perbedaan antara autentikasi dan otorisasi? Bagaiamana Django mengimplementasikan kedua konsep tersebut?
+
+## Apa saja kelebihan dan kekurangan session dan cookies dalam konteks menyimpan state di aplikasi web?
+
+## Apakah penggunaan cookies aman secara default dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai? Bagaimana Django menangani hal tersebut?
+
+## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+- Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna mengakses aplikasi sebelumnya sesuai dengan status login/logoutnya.
+    - Register:
+        - Membuat fungsi register, render ke register.html
+        - Buat berkas register.html di main/templates sesuai keinginan
+        - Pada url.py, import dan tambahkan path url untuk akses fungsi register
+    - Login:
+        - Membuat fungsi login, render ke login.html
+        - Buat berkas login.html di main/templates sesuai keinginan
+        - Pada urls.py import dan tambahkan path url untuk akses fungsi login
+    - Logout:
+        - Membuat fungsi logout
+        - Tambahkan tombol pada main.html yang mengarah ke url logout.
+
+- Membuat dua (2) akun pengguna dengan masing-masing tiga (3) dummy data menggunakan model yang telah dibuat sebelumnya untuk setiap akun di lokal.
+- Menghubungkan model Product dengan User.
+- Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last_login pada halaman utama aplikasi.
+
+</details>
+
