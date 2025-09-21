@@ -193,6 +193,12 @@ https://localstartupfest.lokercepat.id/faq/perbedaan-xml-dan-json/
 https://docs.djangoproject.com/en/5.2/topics/forms/
 https://owasp.org/www-community/attacks/csrf
 
+
+
+
+
+
+
 # **Tugas 4**
 ## Apa itu Django AuthenticationForm? Jelaskan juga kelebihan dan kekurangannya.
 
@@ -216,9 +222,31 @@ https://owasp.org/www-community/attacks/csrf
         - Membuat fungsi logout
         - Tambahkan tombol pada main.html yang mengarah ke url logout.
 
-- Membuat dua (2) akun pengguna dengan masing-masing tiga (3) dummy data menggunakan model yang telah dibuat sebelumnya untuk setiap akun di lokal.
-- Menghubungkan model Product dengan User.
-- Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last_login pada halaman utama aplikasi.
+    - Merestriksi akses halaman main dan product detail, sehingga hanya dapat ditampilkan ketika pengguna sudah login.
+        - Menambahkan decorator login_required di atas fungsi show_main dan show_product.
+            - Format: login_required(redirect_field_name='next', login_url=None).
+            - Sehingga ketika user tidak login, akan redirect ke login url terlebih dahulu. Ketika sudah terlogin baru akan mengeksekusi fungsi dibawah decorator tersebut.
 
+- Membuat dua (2) akun pengguna dengan masing-masing tiga (3) dummy data menggunakan model yang telah dibuat sebelumnya untuk setiap akun di lokal.
+
+- Menghubungkan model Product dengan User.
+    - Pada models.py, import User dan menambahkan potongan code ForeignKey untuk menghubungkan satu product dengan satu user melalui sebuah relationship.
+    - Melakukan file migrasi untuk mengupdate perubahan pada models.py (makemigrations dan migrate)
+    - Pada views.py, mengubah potongan code pada fungsi add_product dengan menambahkan commit False sebagai parameter form.save, agar ketika product ditambahkan, form tidak hanya langsung menyimpan data product yang ditambahkan, tetapi juga dapat menyimpan user yang sedang login dengan nilai request.user.
+
+    - Pada views.py, menambah potongan code untuk dapat memfilter tampilan product yang diinginkan (mengambil nilai parameter filter jika ada) dengan default awal menampilkan semua product (default ke "all")
+    - Pada main.html, menambahkan button My Product dan All Product beserta dengan filter sehingga dapat diidentifikasi oleh fungsi show_main untuk memfilter dan menampilkan product yang sesuai.
+        - Perlu ditambahkan jenis type pada button, karena default type merupakan submit (mengirim form ketika ditekan). Sehingga diperlukan type button jika tidak ada yang ingin dilakukan. Aksi klik button di-handle oleh <a>.
+    
+    - Menampilkan user yang memiliki product pada halaman product detail dengan menambahkan kode pada product_detail.html untuk mengambil mengambil username pada field user yang didapatkan berdasarkan product.
+
+
+- Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last_login pada halaman utama aplikasi.
+    - Cookies
+    - main.html tambah informasi username login dan last login
+
+
+References:
+https://docs.djangoproject.com/en/5.2/topics/auth/default/
 </details>
 
