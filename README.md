@@ -201,12 +201,39 @@ https://owasp.org/www-community/attacks/csrf
 
 # **Tugas 4**
 ## Apa itu Django AuthenticationForm? Jelaskan juga kelebihan dan kekurangannya.
+-  Form bawaan Django untuk menangani proses login pengguna. Menyediakan field standard username dan password yang kemudian akan dilakukan validasi dengan autentikasi django.
+- Kelebihan: melakukan validasi otomatis
+- Kekurangan: kurang fleksibel karena tidak dapat divalidasi untuk field selain username dan password
 
 ## Apa perbedaan antara autentikasi dan otorisasi? Bagaiamana Django mengimplementasikan kedua konsep tersebut?
+- Autentikasi:
+    - Memvalidasi username dan password yang dimasukkan sesuai dengan database. 
+    - Pengimplimentasiannya dapat dilakukan dengan melakukan import django.contrib.auth, khususnya authenticate().
+- Otorisasi: 
+    - Menentukan permissions atau apa yang dapat dilakukan oleh pengguna ketika login (misalnya, permissions untuk admin dan user yang berbeda).
+    - Pengimplementasiannya 
 
 ## Apa saja kelebihan dan kekurangan session dan cookies dalam konteks menyimpan state di aplikasi web?
+HTTP secara default bersifat stateless, setiap browser mengirimkan request, request ini akan bersifat independent, tidak diketahui oleh server darimana request ini berasal dan hubungan dengan request sebelumnya. Session dan cookies ditambahkan agar web bisa mengingat user.
+- Session:
+    - Data yang disimpan pada sisi server untuk melacak state pengguna. Browser mengirimkan suatu session ID ke server pada setiap request. Server yang mengelola dan meningat state user.
+    - Kelebihan:
+        - Lebih aman untuk menyimpan informasi mengenai pengguna, karena disimpan di server, tidak dapat disalahgunakan oleh yang lain
+        - Bisa untuk menyimpan data yang besar
+    - Kekurangan:
+        - Beban server tinggi karena semua state disimpan pada server
+        - Memerlukan pengaturan expired, agar session laam yang tidak dipakai tidak menumpuk.
+- Cookies:
+    - Data yang disimpan pada sisi klien/browser. Server tidak mengingat state user, hanya apa yang dikirim browser.
+    - Kelebihan:
+        - Tidak mebebani server
+        - Cocok untuk data ringan dan non-sensitif
+    - Kekurangan:
+        - Kurang aman karena data dapat dimanipulasi
+        - Hanya dapat menyimpan maksimal 4KB data
 
 ## Apakah penggunaan cookies aman secara default dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai? Bagaimana Django menangani hal tersebut?
+- 
 
 ## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 - Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna mengakses aplikasi sebelumnya sesuai dengan status login/logoutnya.

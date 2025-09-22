@@ -10,6 +10,10 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
+import datetime
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
 # Create your views here.
 @login_required(login_url='/login')
 def show_main(request):
@@ -25,6 +29,7 @@ def show_main(request):
         "nama" : "Vanessa",
         "kelas" : "PBP B",
         "product_list": product_list,
+        "last_login" : request.COOKIES.get('last_login',)
         }
 
     return render(request, "main.html", context)
@@ -48,7 +53,12 @@ def login_user(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('main:show_main')
+
+            response = HttpResponseRedirect(reverse("main:show_main"))
+            response.set_cookie('last_login', str(datetime.datetime.now()))
+            return response
+        
+            # return redirect('main:show_main')
     else:
         form = AuthenticationForm(request)
     context = {'form':form}
@@ -56,7 +66,12 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
-    return redirect('main:login')
+
+    response = HttpResponseRedirect(reverse('main:login'))
+    response.delete_cookie('last_login')
+    return response
+
+    # return redirect('main:login')
 
 def add_product(request):
     form = ProductForm(request.POST or None)

@@ -17,7 +17,8 @@
     <button>Logout</button>
 </a>
 
-<hr>
+<h5>Username login: {{ request.user.username }}</h5>
+<h5>Sesi terakhir login: {{ last_login }}</h5>
 
 <a href="?filter=all">
     <button type="button">All Products</button>
@@ -26,6 +27,7 @@
     <button type="button">My Products</button>
 </a>
 
+<hr>
 
 {% if not product_list %}
 <p>Belum ada produk pada toko</p>
