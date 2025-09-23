@@ -201,53 +201,59 @@ https://owasp.org/www-community/attacks/csrf
 
 # **Tugas 4**
 ## Apa itu Django AuthenticationForm? Jelaskan juga kelebihan dan kekurangannya.
--  Form bawaan Django untuk menangani proses login pengguna. Menyediakan field standard username dan password yang kemudian akan dilakukan validasi dengan autentikasi django.
-- Kelebihan: melakukan validasi otomatis
-- Kekurangan: kurang fleksibel karena tidak dapat divalidasi untuk field selain username dan password
+-  Form bawaan Django yang digunakan untuk menangani proses login/autentikasi pengguna. Form ini merupakan bagian dari sistem autentikasi Django (django.contrib.auth.forms) yang menyediakan fungsionalitas standar untuk memverifikasi pengguna. Menyediakan field standard username dan password yang kemudian akan dilakukan validasi dengan autentikasi django, dan mengembalikan objek User jika valid. Username untuk identifikasi dan password untuk verifikasi.
+- Kelebihan: melakukan validasi otomatis, fleksibel dapat menambahkan field tambahan, menyediakan pesan error jika input tidak valid.
+- Kekurangan: default hanya menggunakan/menangani username dan password, sehingga butuh pengembangan tambahan untuk kebutuhan yang kompleks.
 
 ## Apa perbedaan antara autentikasi dan otorisasi? Bagaiamana Django mengimplementasikan kedua konsep tersebut?
 - Autentikasi:
-    - Memvalidasi username dan password yang dimasukkan sesuai dengan database. 
+    - Proses memvalidasi/memverifikasi identitas pengguna yang ingin login (username dan password yang dimasukkan sesuai dengan database) 
     - Pengimplimentasiannya dapat dilakukan dengan melakukan import django.contrib.auth, khususnya authenticate().
 - Otorisasi: 
-    - Menentukan permissions atau apa yang dapat dilakukan oleh pengguna ketika login (misalnya, permissions untuk admin dan user yang berbeda).
+    - Proses menentukan permissions atau akses apa yang dapat dilakukan oleh pengguna ketika login. Memberikan izin pengguna yang sudah terautentikasi untuk mengakses fungsi-fungsi tertentu.
     - Pengimplementasiannya 
+- Django memiliki sistem autentikasi bawaan yang dapat diimport yaitu django.contrib.auth, menyediakan fitur autentikasi dan otorisasi.
 
 ## Apa saja kelebihan dan kekurangan session dan cookies dalam konteks menyimpan state di aplikasi web?
-HTTP secara default bersifat stateless, setiap browser mengirimkan request, request ini akan bersifat independent, tidak diketahui oleh server darimana request ini berasal dan hubungan dengan request sebelumnya. Session dan cookies ditambahkan agar web bisa mengingat user.
+HTTP secara default bersifat stateless, artinya setiap browser mengirimkan request, request ini akan bersifat independent, tidak diketahui oleh server darimana request ini berasal dan hubungan dengan request sebelumnya. Session dan cookies ditambahkan agar web bisa mengingat user/pengirim yang sama dari satu halaman ke halaman lainnya.
 - Session:
-    - Data yang disimpan pada sisi server untuk melacak state pengguna. Browser mengirimkan suatu session ID ke server pada setiap request. Server yang mengelola dan meningat state user.
-    - Kelebihan:
-        - Lebih aman untuk menyimpan informasi mengenai pengguna, karena disimpan di server, tidak dapat disalahgunakan oleh yang lain
-        - Bisa untuk menyimpan data yang besar
-    - Kekurangan:
-        - Beban server tinggi karena semua state disimpan pada server
-        - Memerlukan pengaturan expired, agar session laam yang tidak dipakai tidak menumpuk.
+    - Data yang disimpan pada sisi server untuk menyimpan data yang lebih sensitif, seperti informasi login. Browser hanya menyimpan cookie khusus yang berisi suatu session ID ke server pada setiap pengguna setelah berhasil melakukan login untuk dapat menghubungkan pengguna dengan data session di server. Dengan ini, data lebih aman karena tidak tersimpan langsung di browser.
+    - Kelebihan session adalah keamanan lebih tinggi untuk menyimpan informasi mengenai pengguna, karena disimpan di server, tidak dapat disalahgunakan oleh yang lain dan bisa untuk menyimpan data yang besar dan kompleks. Namun kekurangannya, beban server tinggi karena semua state disimpan pada server.
 - Cookies:
-    - Data yang disimpan pada sisi klien/browser. Server tidak mengingat state user, hanya apa yang dikirim browser.
-    - Kelebihan:
-        - Tidak mebebani server
-        - Cocok untuk data ringan dan non-sensitif
-    - Kekurangan:
-        - Kurang aman karena data dapat dimanipulasi
-        - Hanya dapat menyimpan maksimal 4KB data
+    - Data yang disimpan pada sisi klien/browser. Berisi data dalam bentuk pasangan key-value yang dikirimkan ke server setiap kali pengguna melakukan request. Misalnya, cookie dapat digunakan untuk menyimpan preferensi bahasa, data login sederhana, atau pengaturan tampilan.
+    - Kelebihan cookies adalah bersifat sederhana dan tidak membebani server sehingga cepat. Cocok untuk data ringan dan non-sensitif. Kekurangannya adalah data kurang aman karena disimpan di browser sehingga dapat dengan mudah dimanipulasi dan juga hanya dapat menyimpan maksimal 4KB data.
 
 ## Apakah penggunaan cookies aman secara default dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai? Bagaimana Django menangani hal tersebut?
-- 
+- Cookies menyimpan preferensi pengguna dan informasi login, sehingga meningkatkan pengalaman pengguna.
+- Namun tidak sepenuhnya aman, karena cookies menyimpan informasi penting seperti user sessions dan juga data tracking. Hal ini membuat cookies rentan jika tidak dikonfigurasi dengan baik.
+- Risiko utama cookies adalah ketika dipakai untuk tracking lintas situs atau menyimpan data sensitif, karena bisa menyebabkan kebocoran privasi dan penyalahgunaan data.
+
+- Risiko potensial yang harus diwaspadai:
+    - Risiko privasi: tracking tanpa consent user
+    - Data misuse: potensi penyalahgunaan data browsing habits
+    - Cross-site tracking: bisa melacak aktivitas across different websites.
+
+- Penanganan Django:
+    - Django menggunakan cookies hanya untuk autentikasi dan session management (user session), bukan untuk menyimpan data sensitif langsung
+    - Menyediakan fitur bawaan untuk mengamankan cookies melalui konfigurasi seperti hanya menggunakan HTTPS dan melindungi dari serangan CSRF(SESSION_COOKIE_SECURE dan SESSION_COOKIE_HTTPONLY) untuk mencegah pencurian data.
 
 ## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 - Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna mengakses aplikasi sebelumnya sesuai dengan status login/logoutnya.
     - Register:
-        - Membuat fungsi register, render ke register.html
+        - Import UserCreationFOrm dan messages pada views.py
+        - Membuat fungsi register yang secara otomatis membuat akun pengguna ketika form di submit, setelah itu di-redirect ke register.html
         - Buat berkas register.html di main/templates sesuai keinginan
         - Pada url.py, import dan tambahkan path url untuk akses fungsi register
     - Login:
-        - Membuat fungsi login, render ke login.html
+        - Import authentication form, authenticate, dan login
+        - Membuat fungsi login yang berfungsi untuk melakukan autentikasi pengguna yang login, setelah berhasil akan di-redirect ke login.html
         - Buat berkas login.html di main/templates sesuai keinginan
         - Pada urls.py import dan tambahkan path url untuk akses fungsi login
     - Logout:
-        - Membuat fungsi logout
+        - Import logout
+        - Membuat fungsi logout untuk proses keluar dari sesi yang sedang dijalankan
         - Tambahkan tombol pada main.html yang mengarah ke url logout.
+        - Pada urls.py import dan tambahkan path url untuk akses fungsi logout
 
     - Merestriksi akses halaman main dan product detail, sehingga hanya dapat ditampilkan ketika pengguna sudah login.
         - Menambahkan decorator login_required di atas fungsi show_main dan show_product.
@@ -269,11 +275,18 @@ HTTP secara default bersifat stateless, setiap browser mengirimkan request, requ
 
 
 - Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last_login pada halaman utama aplikasi.
-    - Cookies
-    - main.html tambah informasi username login dan last login
+    - Cookies dapat dimanfaatkan untuk membedakan setiap pengguna dengan datanya masing-masing.
+    - Pengimplementasian pertama dilakukan dengan import datetime untuk mengetahui last login, from django.http import HttpResponse dan HttpResponseRedirect, dan from django.urls import reverse.
+    - Memodifikasi fungsi login dengan variabel response agar dapat menyimpan waktu terakhir pengguna login dan ketika berhasil login akan otomatis akan membawa user ke halaman utama (show_main).
+    - Menambahkan key last login dan valuenya pada fungsi show_main dengan method .get(). Jika cookie last login tidak ada, akan mengirimkan default "Never".
+    - Pada fungsi logout juga perlu dimodifikasi untuk menghapus cookie last_login sehingga data waktu login sebelumnya hilang.
+
+    - Menampilkan detail informasi username dan last login dengan menambahkan potongan kode pada main.html, tambah informasi username login dan last login
 
 
 References:
 https://docs.djangoproject.com/en/5.2/topics/auth/default/
+https://www.geeksforgeeks.org/websites-apps/understanding-cookies-in-web-browsers/
+
 </details>
 

@@ -29,7 +29,7 @@ def show_main(request):
         "nama" : "Vanessa",
         "kelas" : "PBP B",
         "product_list": product_list,
-        "last_login" : request.COOKIES.get('last_login',)
+        "last_login" : request.COOKIES.get('last_login', 'Never')
         }
 
     return render(request, "main.html", context)
