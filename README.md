@@ -260,8 +260,6 @@ HTTP secara default bersifat stateless, artinya setiap browser mengirimkan reque
             - Format: login_required(redirect_field_name='next', login_url=None).
             - Sehingga ketika user tidak login, akan redirect ke login url terlebih dahulu. Ketika sudah terlogin baru akan mengeksekusi fungsi dibawah decorator tersebut.
 
-- Membuat dua (2) akun pengguna dengan masing-masing tiga (3) dummy data menggunakan model yang telah dibuat sebelumnya untuk setiap akun di lokal.
-
 - Menghubungkan model Product dengan User.
     - Pada models.py, import User dan menambahkan potongan code ForeignKey untuk menghubungkan satu product dengan satu user melalui sebuah relationship.
     - Melakukan file migrasi untuk mengupdate perubahan pada models.py (makemigrations dan migrate)
@@ -282,6 +280,8 @@ HTTP secara default bersifat stateless, artinya setiap browser mengirimkan reque
     - Pada fungsi logout juga perlu dimodifikasi untuk menghapus cookie last_login sehingga data waktu login sebelumnya hilang.
 
     - Menampilkan detail informasi username dan last login dengan menambahkan potongan kode pada main.html, tambah informasi username login dan last login
+
+- Membuat dua (2) akun pengguna dengan masing-masing tiga (3) dummy data menggunakan model yang telah dibuat sebelumnya untuk setiap akun di lokal.
 
 
 References:
