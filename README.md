@@ -1,5 +1,8 @@
+# Tugas PBP
 PWS: https://vanessa41-footballshop.pbp.cs.ui.ac.id
 
+
+## **Tugas 2**
 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 - Membuat folder baru untuk menempatkan proyek Django
 - Membuat virtual environment dengan "python -m venv env" dan mengaktifkannya dengan "env\Scripts\activate"
@@ -100,23 +103,23 @@ https://www.revou.co/kosakata/django
 
 
 
-# **Tugas 3**
+## **Tugas 3**
 
-## Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
+### Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
  - Data delivery merupakan proses pengiriman data dari satu bagian sistem ke bagian lainnya, bisa dari server ke client maupun client ke server, agar data dapat diproses atau ditampilkan. Contoh, add product merupakan deliver data dari client ke server untuk disimpan dalam database. detail product merupakan deliver data dari server ke client, untuk ditampilkan.
 
  - Client bertugas untuk menampilkan data ke pengguna, server untuk mengelola data dan menangani request dari client, dan database untuk menyimpan data. Ketiga ini membutuhkan data delivery agar komunikasi antar bagian dapat berjalan (untuk mengirim dan menerima data) dengan format yang terstruktur seperti HTML, XML, atau JSON.
 
  - Tanpa data delivery, setiap komponen ini tidak dapat saling terhubung, platform tidak dapat mengelola data-data antar komponen dengan baik. Data delivery penting sebagai jembatan yang memungkinkan komunikasi lancar antara berbagai bagian dari sistem, seperti client, server, dan database.
 
-## Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
+### Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
 - JSON memiliki format yang ringkas dan sederhana. Data ditulis dalam bentuk pasangan key-value yang mirip dengan struktur dictionary di Python. Struktur ini membuat JSON lebih mudah dipahami oleh pengembang, ringan, dan lebih cepat untuk diproses oleh mesin. JSON juga membutuhkan lebih sedikit ruang penyimpanan dibandingkan XML, yang membuat proses transfer data menjadi lebih cepat dan efisien.
 
 - Di sisi lain, XML menggunakan tag untuk membungkus setiap elemen datanya. Struktur XML lebih fleksibel dibandingkan JSON karena dapat menyimpan data yang lebih kompleks sehingga sering digunakan pada proyek besar. Namun, fleksibilitas ini menyebabkan ukuran file XML cenderung lebih besar karena penggunaan tag yang banyak, dan proses XML juga lebih lambar dibandingkan JSON.
 
 - JSON lebih populer karena kesederhanaannya, kemudian pembacaan, ukuran yang lebih kecil, serta performa lebih cepat. Ini membuat JSON menjadi pilihan untuk aplikasi berbasis web maupun mobile. Meskipun demikian, XML tetap memiliki tempatnya, terutama pada sistem besar yang memiliki struktur data yang kompleks dan fleksibel.
  
-## Jelaskan fungsi dari method is_valid() pada form Django dan mengapa kita membutuhkan method tersebut?
+### Jelaskan fungsi dari method is_valid() pada form Django dan mengapa kita membutuhkan method tersebut?
  - Method is_valid() pada form berfungsi untuk memvalidasi data yang dimasukkan pengguna sebelum akhirnya data diproses atau disimpan dalam database.
 
  - Ketika sebuah form dikirimkan, data yang dimasukkan akan diperiksa oleh is_valid(). Proses ini memerikda setiap field dalam data form, memastikan bahwa data yang dimasukkan sesuai dengan tipe data yang diharapkan dan memenuhi semua aturan validasi yang telah ditentukan di model atau form itu sendiri.
@@ -125,14 +128,14 @@ https://www.revou.co/kosakata/django
  
  - Dengan adanya mekanisme ini, Django membantu untuk mencegah data yang dimasukkan salah masuk ke dalam database dan menghindari error, menjaga integritas sistem, juga meningkatkan keamanan dan kebersihan database.
 
-## Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
+### Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
  - Django menyediakan csrf_token sebagai keamanan untuk mencegah mencegah CSRF Attack(Cross-Site Request Forgery). CSRF adalah serangan di mana penyerang mencoba memanfaatkan pengguna yang sudah terautentikasi atau login untuk mengirimkan request berbahaya ke server tanpa sepengetahuan mereka.
 
  - Ketika server meminta form tersebut, Django akan memverifikasi token, mengecek kevalidan request untuk memastikan bahwa request tersebut benar-benar berasal dari sumber yang sah dan bukan dari pihak luar yang berusaha menyerang. Request akan ditolak jika token tidak valid.
 
  - Dengan tidak adanya scrf_token, aplikasi menjadi tidak aman dan rentan terhadap serangan CSRF. Penyerang dapat membuat halaman palsu yang terlihat seperti halaman resmi, yang kemudian memanfaatkan akun pengguna yang sedang login untuk melakukan tindakan berbahaya seperti mengubah data, menghapus data, ataupun melakukan transaksi.
 
-## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 - Tambahkan 4 fungsi views baru untuk melihat objek yang sudah ditambahkan dalam format XML, JSON, XML by ID, dan JSON by ID.
 
   - Pada models.py:
@@ -181,11 +184,11 @@ https://www.revou.co/kosakata/django
 
 - Tambahkan entri url pws pada CSRF_TRUSTED_ORIGINS di settings.py. CSRF_TRUSTED_ORIGINS berisi daftar URL yang dianggap aman untuk menerima request seperti POST (mengizinkan domain luar untuk mengirimkan form). Digunakan jika proyek diakses dari domain eksternal atau server deployment, tidak pada local host.
 
-## Mengakses keempat URL di poin 2 menggunakan Postman, membuat screenshot dari hasil akses URL pada Postman, dan menambahkannya ke dalam README.md.
+### Mengakses keempat URL di poin 2 menggunakan Postman, membuat screenshot dari hasil akses URL pada Postman, dan menambahkannya ke dalam README.md.
 https://docs.google.com/document/d/1NJP6V4iPBpmWb_cuJqhu4gwz8LW48pW49eaBW3HsTcw/edit?usp=sharing
 
 
-## Apakah ada feedback untuk asdos di tutorial 2 yang sudah kalian kerjakan?
+### Apakah ada feedback untuk asdos di tutorial 2 yang sudah kalian kerjakan?
 Tidak ada
 
 References:
@@ -199,13 +202,13 @@ https://owasp.org/www-community/attacks/csrf
 
 
 
-# **Tugas 4**
-## Apa itu Django AuthenticationForm? Jelaskan juga kelebihan dan kekurangannya.
+## **Tugas 4**
+### Apa itu Django AuthenticationForm? Jelaskan juga kelebihan dan kekurangannya.
 -  Form bawaan Django yang digunakan untuk menangani proses login/autentikasi pengguna. Form ini merupakan bagian dari sistem autentikasi Django (django.contrib.auth.forms) yang menyediakan fungsionalitas standar untuk memverifikasi pengguna. Menyediakan field standard username dan password yang kemudian akan dilakukan validasi dengan autentikasi django, dan mengembalikan objek User jika valid. Username untuk identifikasi dan password untuk verifikasi.
 - Kelebihan: melakukan validasi otomatis, fleksibel dapat menambahkan field tambahan, menyediakan pesan error jika input tidak valid.
 - Kekurangan: default hanya menggunakan/menangani username dan password, sehingga butuh pengembangan tambahan untuk kebutuhan yang kompleks.
 
-## Apa perbedaan antara autentikasi dan otorisasi? Bagaiamana Django mengimplementasikan kedua konsep tersebut?
+### Apa perbedaan antara autentikasi dan otorisasi? Bagaiamana Django mengimplementasikan kedua konsep tersebut?
 - Autentikasi:
     - Proses memvalidasi/memverifikasi identitas pengguna yang ingin login (username dan password yang dimasukkan sesuai dengan database) 
     - Pengimplimentasiannya dapat dilakukan dengan melakukan import django.contrib.auth, khususnya authenticate().
@@ -214,7 +217,7 @@ https://owasp.org/www-community/attacks/csrf
     - Pengimplementasiannya 
 - Django memiliki sistem autentikasi bawaan yang dapat diimport yaitu django.contrib.auth, menyediakan fitur autentikasi dan otorisasi.
 
-## Apa saja kelebihan dan kekurangan session dan cookies dalam konteks menyimpan state di aplikasi web?
+### Apa saja kelebihan dan kekurangan session dan cookies dalam konteks menyimpan state di aplikasi web?
 HTTP secara default bersifat stateless, artinya setiap browser mengirimkan request, request ini akan bersifat independent, tidak diketahui oleh server darimana request ini berasal dan hubungan dengan request sebelumnya. Session dan cookies ditambahkan agar web bisa mengingat user/pengirim yang sama dari satu halaman ke halaman lainnya.
 - Session:
     - Data yang disimpan pada sisi server untuk menyimpan data yang lebih sensitif, seperti informasi login. Browser hanya menyimpan cookie khusus yang berisi suatu session ID ke server pada setiap pengguna setelah berhasil melakukan login untuk dapat menghubungkan pengguna dengan data session di server. Dengan ini, data lebih aman karena tidak tersimpan langsung di browser.
@@ -223,7 +226,7 @@ HTTP secara default bersifat stateless, artinya setiap browser mengirimkan reque
     - Data yang disimpan pada sisi klien/browser. Berisi data dalam bentuk pasangan key-value yang dikirimkan ke server setiap kali pengguna melakukan request. Misalnya, cookie dapat digunakan untuk menyimpan preferensi bahasa, data login sederhana, atau pengaturan tampilan.
     - Kelebihan cookies adalah bersifat sederhana dan tidak membebani server sehingga cepat. Cocok untuk data ringan dan non-sensitif. Kekurangannya adalah data kurang aman karena disimpan di browser sehingga dapat dengan mudah dimanipulasi dan juga hanya dapat menyimpan maksimal 4KB data.
 
-## Apakah penggunaan cookies aman secara default dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai? Bagaimana Django menangani hal tersebut?
+### Apakah penggunaan cookies aman secara default dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai? Bagaimana Django menangani hal tersebut?
 - Cookies menyimpan preferensi pengguna dan informasi login, sehingga meningkatkan pengalaman pengguna.
 - Namun tidak sepenuhnya aman, karena cookies menyimpan informasi penting seperti user sessions dan juga data tracking. Hal ini membuat cookies rentan jika tidak dikonfigurasi dengan baik.
 - Risiko utama cookies adalah ketika dipakai untuk tracking lintas situs atau menyimpan data sensitif, karena bisa menyebabkan kebocoran privasi dan penyalahgunaan data.
@@ -237,7 +240,7 @@ HTTP secara default bersifat stateless, artinya setiap browser mengirimkan reque
     - Django menggunakan cookies hanya untuk autentikasi dan session management (user session), bukan untuk menyimpan data sensitif langsung
     - Menyediakan fitur bawaan untuk mengamankan cookies melalui konfigurasi seperti hanya menggunakan HTTPS dan melindungi dari serangan CSRF(SESSION_COOKIE_SECURE dan SESSION_COOKIE_HTTPONLY) untuk mencegah pencurian data.
 
-## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 - Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna mengakses aplikasi sebelumnya sesuai dengan status login/logoutnya.
     - Register:
         - Import UserCreationFOrm dan messages pada views.py
@@ -288,5 +291,38 @@ References:
 https://docs.djangoproject.com/en/5.2/topics/auth/default/
 https://www.geeksforgeeks.org/websites-apps/understanding-cookies-in-web-browsers/
 
+## **Tugas 5**
+
+### Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
+
+### Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design, serta jelaskan mengapa!
+ 
+### Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!
+
+### Jelaskan konsep flex box dan grid layout beserta kegunaannya!
+
+### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+- Implementasikan fungsi untuk menghapus dan mengedit product.
+    - Mengedit product
+        - Buat fungsi edit_product di views dengan parameter request dan id product.
+            - Mendapatkan product by Id
+            - Membuat forms
+            - Jika valid, form akan di save dan redirect ke halaman awal. Kalau tidak valid, tetap di halaman edit product.
+        - Buat berkas HTML sebagai tampilan form edit
+        - Menambahkan url path untuk mengakses fungsi yang sudah dibuat
+    
+    - Menghapus product
+        - Buat fungsi delete_product di views dengan parameter request dan id product untuk menghapus product yang didapatkan by Id. **Setelahnya, return HttpsResponseRedirect(reverse('main:show_main'))**
+        - Menambahkan url path untuk mengakses fungsi yang sudah dibuat
+
+
+- Kustomisasi desain pada template HTML yang telah dibuat pada tugas-tugas sebelumnya menggunakan CSS atau CSS framework (seperti Bootstrap, Tailwind, Bulma) dengan ketentuan sebagai berikut:
+
+    - Kustomisasi halaman login, register, tambah product, edit product, dan detail product semenarik mungkin.
+    - Kustomisasi halaman daftar product menjadi lebih menarik dan responsive. Kemudian, perhatikan kondisi berikut:
+        - Jika pada aplikasi belum ada product yang tersimpan, halaman daftar product akan menampilkan gambar dan pesan bahwa belum ada product yang terdaftar.
+        - Jika sudah ada product yang tersimpan, halaman daftar product akan menampilkan detail setiap product dengan menggunakan card (tidak boleh sama persis dengan desain pada Tutorial!).
+    - Untuk setiap card product, buatlah dua buah button untuk mengedit dan menghapus product pada card tersebut!
+    - Buatlah navigation bar (navbar) untuk fitur-fitur pada aplikasi yang responsive terhadap perbedaan ukuran device, khususnya mobile dan desktop.
 </details>
 
