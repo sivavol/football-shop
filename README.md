@@ -294,12 +294,40 @@ https://www.geeksforgeeks.org/websites-apps/understanding-cookies-in-web-browser
 ## **Tugas 5**
 
 ### Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
+Ketika terdapat beberapa CSS selector yang berlaku untuk satu elemen HTML, browser akan menentukan style yang digunakan berdasarkan CSS Specifity Rules, dengan urutan prioritasnya adalah:
+1. **Inline Style**
+- Selector ini memiliki prioritas tertinggi dan langsung diaplikasikan menggunakan atribut style.
+2. **ID Selector**
+- Prioritas tertinggi kedua, setelah inline style. Diidentifikasi menggunakan atribut id.
+3. **Class and Pseudo-classes**
+- Selector ini berada pada posisi ketiga, biasanya digunakan pada nama class maupun pseudo-classes.
+4. **Attributes**
+- Biasanya digunakan pada atribut-atribut html.
+5. **Element dan Pseudo-elements**
+- Selector dengan posisi terendah, yang biasa digunakan pada elemen-elemen dan pseudo-element dari HTML.
 
 ### Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design, serta jelaskan mengapa!
+Responsive design adalah pendekatan desain web agar tampilan halaman dapat menyesuaikan ukuran layar atau dimensi perangkat yang digunakan. Sehingga tampilan di HP dapat berbeda dengan tampilan di tablet ataupun desktop. Konsep ini penting karena dapat meningkatkan user experience di berbagai perangkat, membuat website lebih aksesibel, dan mengurangi kebutuhan membuat aplikasi berbeda untuk tiap perangkat.
+
+Aplikasi-aplikasi yang sudah reponsive seperti YouTube, video dan tampilan homepage menyesuaikan ukuran layar. Selain itu, terdapat contoh lain seperti Instagram, LinkedIn, dan masih banyak aplikasi lain yang responsive yang dapat kita temukan pada website yang kita gunakan sehari-hari. Contoh aplikasi yang belum menerapkan responsive design adalah SIAKNG. Dapat dilihat ketika menggunakan SIAKNG melalui smartphone, tampilannya masih merupakan tampilan browser yang sama seperti saat membukanya melalui perangkat laptop, dan ini menyebabkan ketidaknyamanan ketika menggunakannya melalui perangkat mobile.
  
 ### Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!
+- Margin: jarak diluar elemen, memisahkan elemen lain. Dapat mengatur margin sisi atas, bawah, kanan, dan kiri dari elemen yang diinginkan.
+- Border: garis yang mengelilingi elemen untuk memberikan batas yang dapat dilihat pengguna, berada di antara margin dan padding. Border dapat dikustomisasi, baik garis, warna, maupun stylenya.
+- Padding: jarak/ruang yang berada di dalam elemen, antara konten dengan border. Sama seperti margin, padding juga dapat digunakan untuk berbagai sisi elemen.
+
 
 ### Jelaskan konsep flex box dan grid layout beserta kegunaannya!
+Flexbox (Flexible Box Layout): 
+- Digunakan untuk mengatur layout satu dimensi (baris atau kolom)
+- Memudahkan dalam mengatur ruang dan elemen dalam suatu kontainer secara otomatis. Fleksibel dalam mengatur posisi, ukuran, dan spasi antar elemen
+- Cocok untuk navigasi, toolbar, atau list card horizontal
+
+Grid layout:
+- Digunakan untuk mengatur layout dua dimensi (baris dan kolom), sehingga memungkinkan pengaturan baris serta kolom sekaligus.
+- Memberikan kontrol penuh untuk membuat tata letak kompleks. Memudahkan dalam mengatur ruang serta elemen ketika bekerja dalam suatu grid
+- Cocok untuk dashboard, layout halaman, atau layout majalah.
+
 
 ### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
 - Implementasikan fungsi untuk menghapus dan mengedit product.
@@ -308,7 +336,7 @@ https://www.geeksforgeeks.org/websites-apps/understanding-cookies-in-web-browser
             - Mendapatkan product by Id
             - Membuat forms
             - Jika valid, form akan di save dan redirect ke halaman awal. Kalau tidak valid, tetap di halaman edit product.
-        - Buat berkas HTML sebagai tampilan form edit
+        - Buat berkas edit_product.html sebagai tampilan form edit
         - Menambahkan url path untuk mengakses fungsi yang sudah dibuat
     
     - Menghapus product
@@ -316,13 +344,31 @@ https://www.geeksforgeeks.org/websites-apps/understanding-cookies-in-web-browser
         - Menambahkan url path untuk mengakses fungsi yang sudah dibuat
 
 
-- Kustomisasi desain pada template HTML yang telah dibuat pada tugas-tugas sebelumnya menggunakan CSS atau CSS framework (seperti Bootstrap, Tailwind, Bulma) dengan ketentuan sebagai berikut:
+- Kustomisasi desain pada template HTML yang telah dibuat pada tugas-tugas sebelumnya menggunakan CSS atau CSS framework (seperti Bootstrap, Tailwind, Bulma)
+
+    - Menambahkan script tailwind pada base.html
+    - Konfigurasi static files pada aplikasi dengan menambahkan potongan kode di setting.py
+
+    - Membuat file global.css di /static/css pada root directory dan menambahkan custom styling.
+    - Menghubungkan global.css dan menambahkan script tailwind ke base.html dengan memodifikasi berkas base.html. Menambahkan script dan link.
 
     - Kustomisasi halaman login, register, tambah product, edit product, dan detail product semenarik mungkin.
-    - Kustomisasi halaman daftar product menjadi lebih menarik dan responsive. Kemudian, perhatikan kondisi berikut:
-        - Jika pada aplikasi belum ada product yang tersimpan, halaman daftar product akan menampilkan gambar dan pesan bahwa belum ada product yang terdaftar.
-        - Jika sudah ada product yang tersimpan, halaman daftar product akan menampilkan detail setiap product dengan menggunakan card (tidak boleh sama persis dengan desain pada Tutorial!).
+        - Mengedit login.html, register.html, add_product.html, product_detail.html.
+
+    - Kustomisasi halaman daftar product menjadi lebih menarik dan responsive. Jika pada aplikasi belum ada product yang tersimpan, halaman daftar product akan menampilkan gambar dan pesan bahwa belum ada product yang terdaftar. Jika sudah ada product yang tersimpan, halaman daftar product akan menampilkan detail setiap product dengan menggunakan card (tidak boleh sama persis dengan desain pada Tutorial!).
+        - Menambahkan berkas card_product.html untuk tampilan card
+        - Menambahkan image ke static/image sebagai tampilan ketika tidak ada thumbnail
+        - Mengedit main.html untuk menggunakan card product dan image.
+
+
     - Untuk setiap card product, buatlah dua buah button untuk mengedit dan menghapus product pada card tersebut!
+
     - Buatlah navigation bar (navbar) untuk fitur-fitur pada aplikasi yang responsive terhadap perbedaan ukuran device, khususnya mobile dan desktop.
+        - Buat berkas navbar.html pada folder templates di root directory.
+        - Include navbar.html pada main.html
+
+References:
+https://www.geeksforgeeks.org/css/css-specificity/
+
 </details>
 
