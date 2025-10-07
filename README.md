@@ -370,5 +370,12 @@ Grid layout:
 References:
 https://www.geeksforgeeks.org/css/css-specificity/
 
+
+## **Tugas 6**
+### Apa perbedaan antara synchronous request dan asynchronous request?
+### Bagaimana AJAX bekerja di Django (alur request–response)?
+### Apa keuntungan menggunakan AJAX dibandingkan render biasa di Django?
+### Bagaimana cara memastikan keamanan saat menggunakan AJAX untuk fitur Login dan Register di Django?
+### Bagaimana AJAX mempengaruhi pengalaman pengguna (User Experience) pada website?
 </details>
 
