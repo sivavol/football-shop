@@ -115,13 +115,4 @@
         e.preventDefault();
         addProductEntry();
     })
-
-    async function deleteProductEntry(productId) {
-        await fetch(`/delete-product-ajax/${productId}/`, {
-            method: "DELETE",
-        });
-
-        showToast('Product deleted successfully!', '', 'error');
-        document.dispatchEvent(new CustomEvent('productDeleted'));
-    }
 </script>

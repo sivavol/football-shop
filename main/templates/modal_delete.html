@@ -91,12 +91,7 @@
     async function deleteProductEntry() {
         const productId = document.getElementById("delete-product-id").value;
 
-        if (!productId || productId === 'undefined' || productId === '') {
-            showToast('Error', 'Delete Failed: Product ID is missing.', 'error');
-            return; 
-        }
-
-        const response = await fetch(`{% url 'main:delete_product_entry_ajax' '00000000-0000-0000-0000-000000000000' %}`.replace('00000000-0000-0000-0000-000000000000', productId), {
+        const response = await fetch(`/delete-product-ajax/${productId}/`, {
             method: "POST",
             headers: {
                 // Wajib untuk request non-GET di Django
@@ -111,16 +106,12 @@
             
             showToast('Success', data.message || 'Product deleted successfully.', 'success'); 
             
-            // Hapus kartu produk dari DOM secara instan, tanpa menunggu refresh dari fetchProductsFromServer()
-            const cardElement = document.getElementById(`.product-card-${productId}`);
-            if (cardElement) cardElement.remove();
+            document.getElementById(`product-card-${productId}`)?.remove();
 
             document.dispatchEvent(new CustomEvent('productDeleted'));
         } else {
             hideModalDelete();
-            
             alert("Failed to delete product!");
         }
     }
-
 </script>

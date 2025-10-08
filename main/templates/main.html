@@ -142,10 +142,6 @@ function buildProductCardElement(product) {
     const articleElement = document.createElement('article');
     articleElement.className = 'bg-white rounded-2xl border border-gray-200 shadow-lg hover:shadow-2xl transition duration-300 overflow-hidden group';
 
-    // tambahkan id untuk kemudahan penghapusan DOM
-    articleElement.id = `product-card-${product.id}`; // ID unik
-    articleElement.classList.add(`product-card-id-${product.id}`); // Kelas untuk query
-
     const detailLink = `{% url 'main:show_product' '00000000-0000-0000-0000-000000000000' %}`.replace('00000000-0000-0000-0000-000000000000', product.id);
     // const editLink = `{% url 'main:edit_product_entry_ajax' '00000000-0000-0000-0000-000000000000' %}`.replace('00000000-0000-0000-0000-000000000000', product.id);
     // const deleteLink = `{% url 'main:delete_product_entry_ajax' '00000000-0000-0000-0000-000000000000' %}`.replace('00000000-0000-0000-0000-000000000000', product.id);
