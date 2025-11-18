@@ -17,6 +17,11 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
+import requests
+from django.utils.html import strip_tags
+import json
+from django.http import JsonResponse
+
 # Create your views here.
 @login_required(login_url='/login')
 def show_main(request):
@@ -230,3 +235,70 @@ def delete_product_entry_ajax(request, id):
     product.delete()
 
     return JsonResponse({'message': 'Product deleted successfully.'}, status=200)
+
+def proxy_image(request):
+    image_url = request.GET.get('url')
+    if not image_url:
+        return HttpResponse('No URL provided', status=400)
+    
+    try:
+        # Fetch image from external source
+        response = requests.get(image_url, timeout=10)
+        response.raise_for_status()
+        
+        # Return the image with proper content type
+        return HttpResponse(
+            response.content,
+            content_type=response.headers.get('Content-Type', 'image/jpeg')
+        )
+    except requests.RequestException as e:
+        return HttpResponse(f'Error fetching image: {str(e)}', status=500)
+    
+@csrf_exempt
+def create_product_flutter(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+
+        name = strip_tags(data.get("name", ""))
+        description = strip_tags(data.get("description", ""))
+        category = data.get("category", "")
+        thumbnail = data.get("thumbnail", "")
+        price = data.get("price", 0)
+        is_featured = data.get("is_featured", False)
+
+        user = request.user
+
+        new_product = Product(
+            name=name,
+            description=description,
+            category=category,
+            thumbnail=thumbnail,
+            price=price,
+            is_featured=is_featured,
+            user=user,
+        )
+        new_product.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+
+    return JsonResponse({"status": "error"}, status=401)
+
+@login_required
+def my_products(request):
+    user = request.user
+    products = Product.objects.filter(user=user)
+
+    product_list = []
+    for p in products:
+        product_list.append({
+            "id": str(p.id),
+            "name": p.name,
+            "price": p.price,
+            "description": p.description,
+            "thumbnail": p.thumbnail,
+            "category": p.category,
+            "is_featured": p.is_featured,
+            "user_username": p.user.username,
+        })
+
+    return JsonResponse(product_list, safe=False)
